@@ -1,0 +1,35 @@
+.pnd {
+    font-family: 'montserrat', sans-serif;
+    color: #eee;
+    width: 100%;
+    height: 100vh;
+    background: url("src/assets/images/404_web.jpg") no-repeat fixed center/cover; 
+}
+.error-message {
+    padding-top: 10%;
+    width: 60%;
+}
+
+.pnd p{
+    font-size: 3rem;
+    user-select: none;
+    padding: 1rem;
+    margin-left: 10%;
+}
+
+.pnd h1{
+    font-size: 15rem;
+    font-family: 'League Spartan Bold', sans-serif;
+    padding: 1rem;
+    user-select: none;
+    margin-left: 35%;
+}
+.pnd a{
+    text-decoration: none;
+    color: #eee;
+}
+
+.pnd a:hover {
+    color: rgb(131, 126, 126);
+    transition: 1s;
+}
