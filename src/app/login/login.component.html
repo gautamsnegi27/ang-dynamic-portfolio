@@ -1,13 +1,13 @@
 <div class="login-container">
 	<div class="container" id="container">
 		<div class="form-container sign-up-container">
-			<form action="#">
+			<form [formGroup]="form">
 				<h1 style="color:#14253F">Create Account</h1>
 				<!-- <div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div> -->
+					<a href="#" class="social"><i class="fa fa-facebook-f"></i></a>
+					<a href="#" class="social"><i class="fa fa-google-plus-g"></i></a>
+					<a href="#" class="social"><i class="fa fa-linkedin-in"></i></a>
+				</div> -->
 				<span style="color:rgb(47, 76, 120); font-size: .8em;">Please provide details for signup</span>
 				<input type="text" placeholder="First Name" />
 				<input type="text" placeholder="Last Name" />
@@ -18,16 +18,19 @@
 			</form>
 		</div>
 		<div class="form-container sign-in-container">
-			<form action="#">
+			<form (submit) = "login()" method="POST" [formGroup]="form">
 				<h1 style="color:#14253F">Sign in</h1>
 				<!-- <div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div> -->
-				<span style="color:rgb(47, 76, 120); font-size: .8em;">Please enter the details</span>
-				<input type="email" placeholder="Email" />
-				<input type="password" placeholder="Password" />
+					<a href="#" class="social"><i class="fa fa-facebook-f"></i></a>
+					<a href="#" class="social"><i class="fa fa-google-plus-g"></i></a>
+					<a href="#" class="social"><i class="fa fa-linkedin-in"></i></a>
+				</div> -->
+				<span style="color:rgb(47, 76, 120);">Please enter the details</span>
+				<input type="text" placeholder="Email" formControlName="username" />
+				<input type="password" placeholder="Password" formControlName="password" />
+				<label *ngIf='invalidDetails' style="color: red;">
+					Invalid Deails. Please try again
+				</label>
 				<!-- <a href="#">Forgot your password?</a> -->
 				<button>Sign In</button>
 			</form>
@@ -40,8 +43,8 @@
 					<button class="ghost" id="signIn">Sign In</button>
 				</div>
 				<div class="overlay-panel overlay-right">
-					<h1>New Here?</h1>
-					<p>Please enter your credentials to see your dashboard</p>
+					<h1>Are you new Here?</h1>
+					<p>Click here to</p>
 					<button class="ghost" id="signUp">Sign Up</button>
 				</div>
 			</div>
