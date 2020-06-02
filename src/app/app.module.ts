@@ -28,7 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         component: LoginComponent
       },
       {
-        path: 'portfolio',
+        path: 'portfolio/user/:user',
         component: PortfolioComponent
       },
       {

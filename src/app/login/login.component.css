@@ -7,8 +7,12 @@
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
 	margin: -20px 0 50px;
+	font-size: 1.3rem;
 }
 
+.login-container label {
+	width: 100%;
+}
 .login-container h1 {
 	font-weight: bold;
 	margin: 0;
@@ -24,10 +28,6 @@
 	line-height: 20px;
 	letter-spacing: 0.5px;
 	margin: 20px 0 30px;
-}
-
-.login-container span {
-	font-size: 12px;
 }
 
 .login-container a {
@@ -243,4 +243,16 @@ footer i {
 footer a {
     color: #3c97bf;
     text-decoration: none;
+}
+
+@media screen and (max-width: 600px){
+	.login-container input{
+	padding: 6px 10px;
+	}
+	footer {
+		height: 14%;
+	}
+	h1 {
+		font-size: 1.9rem;
+	}
 }

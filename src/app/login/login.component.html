@@ -1,35 +1,45 @@
 <div class="login-container">
 	<div class="container" id="container">
 		<div class="form-container sign-up-container">
-			<form [formGroup]="form">
+			<form (submit) = "signUp()" [formGroup]="form" ngNativeValidate>
 				<h1 style="color:#14253F">Create Account</h1>
 				<!-- <div class="social-container">
 					<a href="#" class="social"><i class="fa fa-facebook-f"></i></a>
 					<a href="#" class="social"><i class="fa fa-google-plus-g"></i></a>
 					<a href="#" class="social"><i class="fa fa-linkedin-in"></i></a>
 				</div> -->
-				<span style="color:rgb(47, 76, 120); font-size: .8em;">Please provide details for signup</span>
-				<input type="text" placeholder="First Name" />
-				<input type="text" placeholder="Last Name" />
-				<input type="email" placeholder="Email" />
-				<input type="password" placeholder="Password" />
-				<input type="password" placeholder="Re-enter Password" />
+				<input type="email" placeholder="Email" formControlName="email" autocomplete="username" required >
+				<input type="text" placeholder="Username" formControlName="username" autocomplete="username" 
+				(blur)="validateUserName()" required >
+				<label *ngIf="userPresent" class="alert alert-danger">
+					Username already exists
+				</label>
+				<input type="text" placeholder="First Name" formControlName="firstname" autocomplete="firstname" required >
+				<input type="text" placeholder="Last Name" formControlName="lastname" autocomplete="lastname" required >
+				<input type="password" placeholder="Password" formControlName="password" autocomplete="new-password" 
+				required > 
+				<!-- (blur)="passwordPattern()"  -->
+				<input type="password" (blur)="matchPassword()" placeholder="Re-enter Password" 
+				formControlName="repass" autocomplete="new-password" required >
+				<label *ngIf="passMatch" class="alert alert-danger">
+					Passwords did not match. Please try again.
+				</label>
 				<button>Sign Up</button>
+				
 			</form>
 		</div>
 		<div class="form-container sign-in-container">
-			<form (submit) = "login()" method="POST" [formGroup]="form">
+			<form (submit) = "login()" [formGroup]="form" ngNativeValidate>
 				<h1 style="color:#14253F">Sign in</h1>
 				<!-- <div class="social-container">
 					<a href="#" class="social"><i class="fa fa-facebook-f"></i></a>
 					<a href="#" class="social"><i class="fa fa-google-plus-g"></i></a>
 					<a href="#" class="social"><i class="fa fa-linkedin-in"></i></a>
 				</div> -->
-				<span style="color:rgb(47, 76, 120);">Please enter the details</span>
-				<input type="text" placeholder="Email" formControlName="username" />
-				<input type="password" placeholder="Password" formControlName="password" />
-				<label *ngIf='invalidDetails' style="color: red;">
-					Invalid Deails. Please try again
+				<input type="text" placeholder="Email" autocomplete="username" formControlName="username" required/>
+				<input type="password" placeholder="Password" autocomplete="current-password" formControlName="password" required/>
+				<label *ngIf='invalidDetails' class="alert alert-danger">
+					Invalid Details. Please try again
 				</label>
 				<!-- <a href="#">Forgot your password?</a> -->
 				<button>Sign In</button>
@@ -43,22 +53,13 @@
 					<button class="ghost" id="signIn">Sign In</button>
 				</div>
 				<div class="overlay-panel overlay-right">
-					<h1>Are you new Here?</h1>
+					<h1>Are You New Here?</h1>
 					<p>Click here to</p>
 					<button class="ghost" id="signUp">Sign Up</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<!-- <footer>
-	<p>
-		Created with <i class="fa fa-heart"></i> by
-		<a target="_blank" href="https://florin-pop.com">Florin Pop</a>
-		- Read how I created this and how you can join the challenge
-		<a target="_blank" href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/">here</a>.
-	</p>
-</footer> -->
 
 	<footer class="copyright">
 		<p>&copy; 2020 Gautam Singh Negi</p>
