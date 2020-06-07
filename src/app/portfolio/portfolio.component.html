@@ -74,7 +74,7 @@
                         <!-- <h6>Web Development</h6> -->
                         <h1>{{project.projectName}}</h1>
                         <p>{{project.projectDescription}}</p>
-                        <a [href]="project.projectLink" target="_blank" class="cta">View Details</a>
+                        <a *ngIf="project.projectLink!=null" [href]="project.projectLink" target="_blank" class="cta">View Details</a>
                     </div>
                 </div>
                 <div class="portfolio-item" *ngIf="even">
@@ -82,7 +82,7 @@
                         <!-- <h6>Web Design</h6> -->
                         <h1>{{project.projectName}}</h1>
                         <p>{{project.projectDescription}}</p>
-                        <a [href]="project.projectLink" target="_blank" class="cta">View Details</a>
+                        <a *ngIf="project.projectLink!=null" [href]="project.projectLink" target="_blank" class="cta">View Details</a>
                     </div>
                     <div class="portfolio-img" data-aos="fade-left" data-aos-delay="100">
                         <img [src]="project.projectImage" alt="could not load picture">
@@ -118,18 +118,18 @@
             </div>
             <div class="social-media">
                 <ul class="nav-list">
-                    <li *ngIf="userDetailsModel!=null && userDetailsModel.socialMediaDetailsModel.linkedinUrl!=null">
+                    <li *ngIf="userDetailsModel.socialMediaDetailsModel.linkedinUrl!=null" data-aos="fade-right" [attr.data-aos-delay]="200">
                         <a [href]="userDetailsModel.socialMediaDetailsModel.linkedinUrl" target="_blank"
                             class="icon-link">
                             <i class="fa fa-linkedin-square"></i>
                         </a>
                     </li>
-                    <li *ngIf="userDetailsModel.socialMediaDetailsModel.fbUrl!=null">
+                    <li *ngIf="userDetailsModel.socialMediaDetailsModel.fbUrl!=null" data-aos="fade-right" [attr.data-aos-delay]="400">
                         <a [href]="userDetailsModel.socialMediaDetailsModel.fbUrl" target="_blank" class="icon-link">
                             <i class="fa fa-facebook-square"></i>
                         </a>
                     </li>
-                    <li *ngIf="userDetailsModel.socialMediaDetailsModel.instaUrl!=null">
+                    <li *ngIf="userDetailsModel.socialMediaDetailsModel.instaUrl!=null" data-aos="fade-right" [attr.data-aos-delay]="600">
                         <a [href]="userDetailsModel.socialMediaDetailsModel.instaUrl" target="_blank" class="icon-link">
                             <i class="fa fa-instagram"></i>
                         </a>
