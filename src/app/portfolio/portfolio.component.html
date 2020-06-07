@@ -8,181 +8,134 @@
         <nav class="top-nav">
             <ul class="nav-list">
                 <li>
-                    <a class="nav-link" (click)="scroll('gautam')">Home</a>
-                    <a class="nav-link" (click)="scroll('about')">About</a>
+                    <!-- <a *ngIf="owner" class="nav-link" [routerLink]="['/fill/details', 
+                        userDetailsModel.authDetailModel.userName]">Profile
+                    </a> -->
                     <a class="nav-link" (click)="scroll('services')">Services</a>
                     <a class="nav-link" (click)="scroll('portfolio')">Portfolio</a>
                     <a class="nav-link" (click)="scroll('experience')">Experience</a>
                     <a class="nav-link" (click)="scroll('contact')">Contact</a>
+                    <a *ngIf="owner" class="nav-link" (click)="logout()">Logout</a>
                 </li>
             </ul>
         </nav>
-        <div class="landing-text">
-            <h1>Gautam Singh Negi</h1>
-            <h6>Full Stack Developer</h6>
-        </div>
     </header>
-    <section class="about" id="about">
+    <section class="about" id="about" *ngIf="userDetailsModel.description!=null">
         <div class="container">
             <div class="profile-img" data-aos="fade-right" data-aos-delay="100">
                 <img src="assets/images/gsn1.JPEG" alt="test">
             </div>
             <div class="about-details" data-aos="fade-left" data-aos-delay="200">
                 <div class="about-heading">
-                    <h1>About</h1>
-                    <h6>Myself</h6>
+                    <h1>{{userDetailsModel.authDetailModel.firstName}} {{userDetailsModel.authDetailModel.lastName}}</h1>
+                    <!-- <h6>{{userDetailsModel.authDetailModel.firstName}} {{userDetailsModel.authDetailModel.lastName}}</h6> -->
                 </div>
                 <p>
-                    Hi,
-                    I'm Gautam,
-                    A web developer who focuses on writing clean, elegant, efficient and functional code.
-                    I'm currently working as a Software Engineer at Coviam Technologies, Bangalore.
+                    {{userDetailsModel.description}}
                 </p>
-                <div class="social-media">
-                    <ul class="nav-list">
-                        <li><a href="" class="icon-link"><i class="fa fa-facebook-square"></i></a></li>
-                        <li><a href="" class="icon-link"><i class="fa fa-twitter-square"></i></a></li>
-                        <li><a href="" class="icon-link"><i class="fa fa-instagram"></i></a></li>
-                    </ul>
-                </div>
             </div>
-
         </div>
     </section>
 
-    <section class="services" id="services">
+    <section class="services" id="services" *ngIf="userDetailsModel.serviceDetailModels!=null">
         <div class="container">
             <div class="section-heading">
                 <h1>Services</h1>
                 <h6>What can I do for you</h6>
             </div>
             <div class="my-skills">
-                <div class="skill" data-aos="fade-right" data-aos-delay="100">
-                    <div class="icon-container">
-                        <i class="fa fa-briefcase"></i>
+                <div *ngFor="let service of userDetailsModel.serviceDetailModels; let i=index">
+                    <div class="skill" data-aos="fade-right" [attr.data-aos-delay]="200*(i+1)">
+                        <div class="icon-container">
+                            <i class="fa fa-briefcase"></i>
+                        </div>
+                        <h1>{{service.serviceName}}</h1>
+                        <p>
+                            {{service.serviceDescription}}
+                        </p>
                     </div>
-                    <h1>Backend Development</h1>
-                    <p>
-                        I am working on spring framework which majorly comprises of dependency injection
-                        and aspect oriented programming.
-                    </p>
-                </div>
-                <div class="skill" data-aos="fade-right" data-aos-delay="200">
-                    <div class="icon-container">
-                        <i class="fa fa-briefcase"></i>
-                    </div>
-                    <h1>Frontend Development</h1>
-                    <p>
-                        As side project I work on frontend side of the web devlopment with the help of angular,
-                        javascipt, css and html.
-                    </p>
-                </div>
-                <div class="skill" data-aos="fade-right" data-aos-delay="300">
-                    <div class="icon-container">
-                        <i class="fa fa-briefcase"></i>
-                    </div>
-                    <h1>System Design</h1>
-                    <p>
-                        I also work on the planning, analysis, design, deployment, and maintenance part of the
-                        web devlopment.
-                    </p>
-
                 </div>
             </div>
         </div>
     </section>
-    <section class="portfolio" id="portfolio">
+
+    <section class="portfolio" id="portfolio" *ngIf="userDetailsModel.projectModels!=null">
         <div class="container">
             <div class="section-heading">
                 <h1>Portfolio</h1>
                 <h6>View my recent work</h6>
             </div>
-            <div class="portfolio-item">
-                <div class="portfolio-img has-margin-left" data-aos="fade-right" data-aos-delay="100">
-                    <img src="assets/images/portitem1.jpeg" alt="add picture here">
+            <div *ngFor="let project of userDetailsModel.projectModels; let p=index; let even = even; let odd = odd">
+                <div class="portfolio-item" *ngIf="odd">
+                    <div class="portfolio-img has-margin-left" data-aos="fade-right" data-aos-delay="100">
+                        <img [src]="project.projectImage" alt="could not load picture">
+                    </div>
+                    <div class="portfolio-description" data-aos="fade-left" data-aos-delay="100">
+                        <!-- <h6>Web Development</h6> -->
+                        <h1>{{project.projectName}}</h1>
+                        <p>{{project.projectDescription}}</p>
+                        <a [href]="project.projectLink" target="_blank" class="cta">View Details</a>
+                    </div>
                 </div>
-                <div class="portfolio-description" data-aos="fade-left" data-aos-delay="200">
-                    <h6>Web Development</h6>
-                    <h1>Blog Website</h1>
-                    <p>
-                        I'm currently working as a Software Engineer at Coviam Technologies, Bangalore. I'm currently
-                        working as a Software Engineer at Coviam Technologies, Bangalore.
-                    </p>
-                    <a href="#" class="cta">View Details</a>
-                </div>
-            </div>
-            <div class="portfolio-item">
-                <div class="portfolio-description" data-aos="fade-right" data-aos-delay="100">
-                    <h6>Web Design</h6>
-                    <h1>Product Layout</h1>
-                    <p>
-                        I'm currently working as a Software Engineer at Coviam Technologies, Bangalore. I'm currently
-                        working as a Software Engineer at Coviam Technologies, Bangalore.
-                    </p>
-                    <a href="#" class="cta">View Details</a>
-                </div>
-                <div class="portfolio-img" data-aos="fade-left" data-aos-delay="200">
-                    <img src="assets/images/portitem2.jpeg" alt="add picture here">
-                </div>
-            </div>
-            <div class="portfolio-item">
-                <div class="portfolio-img has-margin-left" data-aos="fade-right" data-aos-delay="300">
-                    <img src="assets/images/portitem3.jpeg" alt="add picture here">
-                </div>
-                <div class="portfolio-description" data-aos="fade-left" data-aos-delay="400">
-                    <h6>Web Design</h6>
-                    <h1>Product Sketch</h1>
-                    <p>
-                        I'm currently working as a Software Engineer at Coviam Technologies, Bangalore. I'm currently
-                        working as a Software Engineer at Coviam Technologies, Bangalore.
-                    </p>
-                    <a href="#" class="cta">View Details</a>
+                <div class="portfolio-item" *ngIf="even">
+                    <div class="portfolio-description" data-aos="fade-right" data-aos-delay="100">
+                        <!-- <h6>Web Design</h6> -->
+                        <h1>{{project.projectName}}</h1>
+                        <p>{{project.projectDescription}}</p>
+                        <a [href]="project.projectLink" target="_blank" class="cta">View Details</a>
+                    </div>
+                    <div class="portfolio-img" data-aos="fade-left" data-aos-delay="100">
+                        <img [src]="project.projectImage" alt="could not load picture">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="experience" id="experience">
+    <section class="experience" id="experience" *ngIf="userDetailsModel.experienceDetailModels!=null">
         <div class="container">
             <div class="section-heading">
                 <h1>Work Experience</h1>
                 <h6>Past and current jobs</h6>
             </div>
             <div class="timeline" data-aos="fade-down" data-aos-delay="100">
-                <ul>
-                    <li class="date" data-date="2016 - Present">
-                        <h1>Coviam</h1>
+                <ul *ngFor="let experience of userDetailsModel.experienceDetailModels; let e=index">
+                    <li class="date" attr.data-date="{{dates[e]}}">
+                        <h1>{{experience.companyName}}</h1>
                         <p>
-                            I am working as a software engineer primarily focussing on backend i.e. Java Development
-                            with spring framework. It also includes database operations.
+                            {{experience.jobDescription}}
                         </p>
                     </li>
                 </ul>
             </div>
         </div>
     </section>
-
     <section class="contact" id="contact">
         <div class="container" data-aos="fade-up" data-aos-delay="200">
             <div class="section-heading">
                 <h1>Contact</h1>
                 <h6>Let's work together</h6>
             </div>
-            <form [formGroup]="form">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" placeholder="Enter your name..." required>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email..." required>
-                <label for="services">Services:</label>
-                <select name="services" id="services" required>
-                    <option value="">Backend Development</option>
-                    <option value="">Frontend Development</option>
-                    <option value="">Fullstack Development</option>
-                </select>
-                <label for="subject">Subject:</label>
-                <textarea name="subject" id="subject" cols="10" rows="10"></textarea>
-                <input type="submit" value="Submit">
-            </form>
+            <div class="social-media">
+                <ul class="nav-list">
+                    <li *ngIf="userDetailsModel.socialMediaDetailsModel.linkedinUrl!=null">
+                        <a [href]="userDetailsModel.socialMediaDetailsModel.linkedinUrl" target="_blank"
+                            class="icon-link">
+                            <i class="fa fa-linkedin-square"></i>
+                        </a>
+                    </li>
+                    <li *ngIf="userDetailsModel.socialMediaDetailsModel.fbUrl!=null">
+                        <a [href]="userDetailsModel.socialMediaDetailsModel.fbUrl" target="_blank" class="icon-link">
+                            <i class="fa fa-facebook-square"></i>
+                        </a>
+                    </li>
+                    <li *ngIf="userDetailsModel.socialMediaDetailsModel.instaUrl!=null">
+                        <a [href]="userDetailsModel.socialMediaDetailsModel.instaUrl" target="_blank" class="icon-link">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </section>
 
