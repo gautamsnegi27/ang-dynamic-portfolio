@@ -15,8 +15,8 @@ export class PortfolioComponent implements OnInit {
   title = 'ang-dynamic-portfolio';
   url = 'https://dynamic-portfolio-spring-boot.herokuapp.com/dynamicportfolio';
   // url = 'http://localhost:8080/dynamicportfolio';
-  private userDetailsModel;
-  private responseModel:UserDetailsModel;
+  userDetailsModel;
+  responseModel:UserDetailsModel;
   owner: boolean;
   dates:string[];
 
