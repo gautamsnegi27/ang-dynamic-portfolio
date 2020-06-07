@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
+import { UserDetailsModel } from 'src/models/UserDetailsModel';
+import { AuthModel } from 'src/models/AuthModel';
 
 @Component({
   selector: 'app-login',
@@ -21,14 +23,13 @@ export class LoginComponent implements OnInit {
     });
   url = 'https://dynamic-portfolio-spring-boot.herokuapp.com/dynamicportfolio';
   // url = 'http://localhost:8080/dynamicportfolio';
-  token:string;
   invalidDetails:boolean = false;
   passMatch:boolean = false;
   userPresent:boolean = false;
   passPattern:boolean;
   // variable declaration ends
 
-  constructor(private http: Http, private router: Router) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   matchPassword() {
@@ -41,11 +42,11 @@ export class LoginComponent implements OnInit {
       'password': this.form.value.password
     }
 
-    this.http.post(this.url+'/login', loginBody).subscribe(response => {
-      if(JSON.stringify(response.json()) !== '{}') {
+    this.http.post<AuthModel>(this.url+'/login', loginBody).subscribe(response => {
+      debugger
+      if(JSON.stringify(response) !== '{}') {
         this.invalidDetails = false;
-        this.token = response.json().jwtToken
-        localStorage.setItem("token", response.json().jwtToken)
+        localStorage.setItem("token", response.jwtToken)
         this.router.navigate(['/portfolio/user', this.form.value.username])
         } else{
           this.invalidDetails = true;
@@ -64,11 +65,9 @@ export class LoginComponent implements OnInit {
     },
     'roles':["USER"]
   }
-    this.http.post(this.url+'/create/user', signUpBody).subscribe(response => {
-      if(JSON.stringify(response.json()) !== '{}') {
+    this.http.post<AuthModel>(this.url+'/create/user', signUpBody).subscribe(response => {
+      if(JSON.stringify(response) !== '{}') {
         this.invalidDetails = false;
-        console.log(response.json().jwtToken)
-        this.token = response.json().jwtToken
         } else{
           this.invalidDetails = true;
         }
@@ -76,10 +75,10 @@ export class LoginComponent implements OnInit {
   }
 
   validateUserName() {
-    this.http.get(this.url+'/user/'+this.form.value.username)
+    this.http.get<UserDetailsModel>(this.url+'/user/'+this.form.value.username)
     .subscribe(response => {
       debugger
-      if(response.json().responseObject) {
+      if(response.responseObject) {
         this.userPresent = true
       } else{
         this.userPresent = false

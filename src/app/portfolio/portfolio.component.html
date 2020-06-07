@@ -20,7 +20,7 @@
             </ul>
         </nav>
     </header>
-    <section class="about" id="about" *ngIf="userDetailsModel.description!=null">
+    <section class="about" id="about" *ngIf="userDetailsModel!=null && userDetailsModel.description!=null">
         <div class="container">
             <div class="profile-img" data-aos="fade-right" data-aos-delay="100">
                 <img src="assets/images/gsn1.JPEG" alt="test">
@@ -37,7 +37,7 @@
         </div>
     </section>
 
-    <section class="services" id="services" *ngIf="userDetailsModel.serviceDetailModels!=null">
+    <section class="services" id="services" *ngIf="userDetailsModel!=null && userDetailsModel.serviceDetailModels!=null">
         <div class="container">
             <div class="section-heading">
                 <h1>Services</h1>
@@ -59,7 +59,7 @@
         </div>
     </section>
 
-    <section class="portfolio" id="portfolio" *ngIf="userDetailsModel.projectModels!=null">
+    <section class="portfolio" id="portfolio" *ngIf="userDetailsModel!=null && userDetailsModel.projectModels!=null">
         <div class="container">
             <div class="section-heading">
                 <h1>Portfolio</h1>
@@ -92,7 +92,7 @@
         </div>
     </section>
 
-    <section class="experience" id="experience" *ngIf="userDetailsModel.experienceDetailModels!=null">
+    <section class="experience" id="experience" *ngIf="userDetailsModel!=null && userDetailsModel.experienceDetailModels!=null">
         <div class="container">
             <div class="section-heading">
                 <h1>Work Experience</h1>
@@ -110,7 +110,7 @@
             </div>
         </div>
     </section>
-    <section class="contact" id="contact">
+    <section class="contact" id="contact" *ngIf = "userDetailsModel!=null && userDetailsModel.socialMediaDetailsModel!=null">
         <div class="container" data-aos="fade-up" data-aos-delay="200">
             <div class="section-heading">
                 <h1>Contact</h1>
@@ -118,7 +118,7 @@
             </div>
             <div class="social-media">
                 <ul class="nav-list">
-                    <li *ngIf="userDetailsModel.socialMediaDetailsModel.linkedinUrl!=null">
+                    <li *ngIf="userDetailsModel!=null && userDetailsModel.socialMediaDetailsModel.linkedinUrl!=null">
                         <a [href]="userDetailsModel.socialMediaDetailsModel.linkedinUrl" target="_blank"
                             class="icon-link">
                             <i class="fa fa-linkedin-square"></i>
