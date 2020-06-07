@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormGroup, FormControl } from '@angular/forms'
-import { PasswordMatchValidator } from '../validators/PasswordMatchValidator';
 import { Router } from '@angular/router';
 
 @Component({
