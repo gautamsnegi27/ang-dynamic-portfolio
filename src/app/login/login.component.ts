@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
       'firstname': new FormControl(),
       'lastname': new FormControl(),
     });
-  // url = 'https://dynamic-portfolio-spring-boot.herokuapp.com/dynamicportfolio/login';
-  url = 'http://localhost:8080/dynamicportfolio';
+  url = 'https://dynamic-portfolio-spring-boot.herokuapp.com/dynamicportfolio';
+  // url = 'http://localhost:8080/dynamicportfolio';
   token:string;
   invalidDetails:boolean = false;
   passMatch:boolean = false;

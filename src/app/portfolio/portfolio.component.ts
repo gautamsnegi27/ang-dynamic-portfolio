@@ -12,8 +12,8 @@ import { Http } from '@angular/http';
 })
 export class PortfolioComponent implements OnInit {
   title = 'ang-dynamic-portfolio';
-  // url = 'https://dynamic-portfolio-spring-boot.herokuapp.com/dynamicportfolio/login';
-  url = 'http://localhost:8080/dynamicportfolio';
+  url = 'https://dynamic-portfolio-spring-boot.herokuapp.com/dynamicportfolio';
+  // url = 'http://localhost:8080/dynamicportfolio';
   private userDetailsModel = {
     description: '',
     designation: '',
