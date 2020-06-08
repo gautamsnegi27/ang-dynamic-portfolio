@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   passMatch:boolean = false;
   userPresent:boolean = false;
   passPattern:boolean;
+  accountCreated:boolean = false;
   // variable declaration ends
 
   constructor(private http: HttpClient, private router: Router) {
@@ -67,9 +68,11 @@ export class LoginComponent implements OnInit {
   }
     this.http.post<AuthModel>(this.url+'/create/user', signUpBody).subscribe(response => {
       if(JSON.stringify(response) !== '{}') {
-        this.invalidDetails = false;
+        this.accountCreated = true;
+        this.router.navigate(['/']);
         } else{
           this.invalidDetails = true;
+          this.accountCreated = false;
         }
       })
   }
