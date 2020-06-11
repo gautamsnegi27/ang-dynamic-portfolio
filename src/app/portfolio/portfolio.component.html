@@ -111,25 +111,25 @@
         </div>
     </section>
     <section class="contact" id="contact" *ngIf = "userDetailsModel!=null && userDetailsModel.socialMediaDetailsModel!=null">
-        <div class="container" data-aos="fade-up" data-aos-delay="200">
+        <div class="container" data-aos="fade-down" data-aos-delay="200">
             <div class="section-heading">
                 <h1>Contact</h1>
                 <h6>Let's work together</h6>
             </div>
             <div class="social-media">
                 <ul class="nav-list">
-                    <li *ngIf="userDetailsModel.socialMediaDetailsModel.linkedinUrl!=null" data-aos="fade-right" [attr.data-aos-delay]="200">
+                    <li *ngIf="userDetailsModel.socialMediaDetailsModel.linkedinUrl!=null" data-aos="fade-right" data-aos-delay="200">
                         <a [href]="userDetailsModel.socialMediaDetailsModel.linkedinUrl" target="_blank"
                             class="icon-link">
                             <i class="fa fa-linkedin-square"></i>
                         </a>
                     </li>
-                    <li *ngIf="userDetailsModel.socialMediaDetailsModel.fbUrl!=null" data-aos="fade-right" [attr.data-aos-delay]="400">
+                    <li *ngIf="userDetailsModel.socialMediaDetailsModel.fbUrl!=null" data-aos="fade-right" data-aos-delay="400">
                         <a [href]="userDetailsModel.socialMediaDetailsModel.fbUrl" target="_blank" class="icon-link">
                             <i class="fa fa-facebook-square"></i>
                         </a>
                     </li>
-                    <li *ngIf="userDetailsModel.socialMediaDetailsModel.instaUrl!=null" data-aos="fade-right" [attr.data-aos-delay]="600">
+                    <li *ngIf="userDetailsModel.socialMediaDetailsModel.instaUrl!=null" data-aos="fade-right" data-aos-delay="600">
                         <a [href]="userDetailsModel.socialMediaDetailsModel.instaUrl" target="_blank" class="icon-link">
                             <i class="fa fa-instagram"></i>
                         </a>

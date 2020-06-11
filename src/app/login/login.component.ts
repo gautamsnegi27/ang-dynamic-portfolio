@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FormGroup, FormControl } from '@angular/forms'
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserDetailsModel } from 'src/models/UserDetailsModel';
-import { AuthModel } from 'src/models/AuthModel';
+import { UserDetailsService } from '../service/user-details.service';
+import { UserDetailsValidators } from '../validators/user-details-validators';
 
 @Component({
   selector: 'app-login',
@@ -14,42 +13,93 @@ export class LoginComponent implements OnInit {
 
   // variable declaration starts
   form = new FormGroup({
-      'username': new FormControl(),
-      'email': new FormControl(),
-      'password': new FormControl(),
-      'repass': new FormControl(),
-      'firstname': new FormControl(),
-      'lastname': new FormControl(),
-    });
-  url = 'https://dynamic-portfolio-spring-boot.herokuapp.com/dynamicportfolio';
-  // url = 'http://localhost:8080/dynamicportfolio';
-  invalidDetails:boolean = false;
-  passMatch:boolean = false;
-  userPresent:boolean = false;
-  passPattern:boolean;
-  accountCreated:boolean = false;
+    'username': new FormControl('', [
+      Validators.required,
+      Validators.minLength(5),
+      UserDetailsValidators.cannotContainSpace
+    ]),
+    'email': new FormControl('', [
+      Validators.required,
+      Validators.email]),
+    'password': new FormControl('', [
+      Validators.required,
+      UserDetailsValidators.passwordValidation,
+    ]),
+    'repass': new FormControl('', Validators.required),
+    'firstname': new FormControl('', Validators.required),
+    'lastname': new FormControl('', Validators.required),
+  }, UserDetailsValidators.passwordShouldMatch,
+    );
+
+  signInForm = new FormGroup({
+    'sUsername': new FormControl('',
+      Validators.required),
+    'sPassword': new FormControl('',
+      Validators.required)
+  });
+
+  invalidDetails: boolean = false;
+  passMatch: boolean = false;
+  userPresent: boolean = false;
+  emailPresent: boolean = false;
+  passPattern: boolean;
+  accountCreated: boolean;
   // variable declaration ends
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private router: Router,
+    private userDetailsService: UserDetailsService) {
   }
 
-  matchPassword() {
-    this.passMatch = this.form.value.repass !==this.form.value.password
+  // getters start here
+  public get username() {
+    return this.form.get('username')
   }
+
+  public get email() {
+    return this.form.get('email')
+  }
+
+  public get password() {
+    return this.form.get('password')
+  }
+
+  public get repass() {
+    return this.form.get('repass')
+  }
+
+  public get firstname() {
+    return this.form.get('firstname')
+  }
+
+  public get lastname() {
+    return this.form.get('lastname')
+  }
+
+  public get sUsername() {
+    return this.signInForm.get('sUsername')
+  }
+
+  public get sPassword() {
+    return this.signInForm.get('sPassword')
+  }
+
+  // end start here
+
+
 
   login() {
     let loginBody = {
-      'userName': this.form.value.username,
-      'password': this.form.value.password
+      userName: this.signInForm.value.sUsername,
+      password: this.signInForm.value.sPassword
     }
 
-    this.http.post<AuthModel>(this.url+'/login', loginBody).subscribe(response => {
-      debugger
-      if(JSON.stringify(response) !== '{}') {
-        this.invalidDetails = false;
-        localStorage.setItem("token", response.jwtToken)
-        this.router.navigate(['/portfolio/user', this.form.value.username])
-        } else{
+    this.userDetailsService.loginUser(loginBody)
+      .subscribe(response => {
+        if (response.jwtToken) {
+          this.invalidDetails = false;
+          localStorage.setItem("token", response.jwtToken)
+          this.router.navigate(['/portfolio/user', response.userName])
+        } else {
           this.invalidDetails = true;
         }
       })
@@ -57,45 +107,57 @@ export class LoginComponent implements OnInit {
 
   signUp() {
     let signUpBody = {
-      'authDetailModel': {
-      'userName': this.form.value.username,
-      'email': this.form.value.email,
-      'password': this.form.value.password,
-      'firstname': this.form.value.firstname,
-      'lastname': this.form.value.lastname
-    },
-    'roles':["USER"]
-  }
-    this.http.post<AuthModel>(this.url+'/create/user', signUpBody).subscribe(response => {
-      if(JSON.stringify(response) !== '{}') {
-        this.accountCreated = true;
-        this.router.navigate(['/']);
-        } else{
-          this.invalidDetails = true;
+      authDetailModel: {
+        userName: this.form.value.username,
+        email: this.form.value.email,
+        password: this.form.value.password,
+        firstname: this.form.value.firstname,
+        lastname: this.form.value.lastname
+      },
+      roles: ['ADMIN']
+    }
+
+    this.userDetailsService.createUser(signUpBody)
+      .subscribe(response => {
+        if (response.status.code === 1000) {
+          this.accountCreated = true;
+          this.router.navigate(['/']);
+        } else {
           this.accountCreated = false;
         }
       })
   }
 
-  validateUserName() {
-    this.http.get<UserDetailsModel>(this.url+'/user/'+this.form.value.username)
-    .subscribe(response => {
-      debugger
-      if(response.responseObject) {
-        this.userPresent = true
-      } else{
-        this.userPresent = false
-      }
-    })
+  validateEmail() {
+    if (this.form.value.email) {
+      this.userDetailsService.validateField('email', this.form.value.email)
+        .subscribe(response => {
+          if (response.status.code == 105) {
+            this.emailPresent = true
+          } else {
+            this.emailPresent = false
+          }
+        });
+    }
   }
 
-  passwordPattern(){
-    let regEx = new RegExp("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}");
-    this.passPattern = !regEx.test(this.form.value.password);
+  validateUser() {
+    if (this.form.value.username) {
+      this.userDetailsService.validateField('user', this.form.value.username)
+        .subscribe(response => {
+          if (response.status.code == 105) {
+            this.userPresent = true
+          } else {
+            this.userPresent = false
+          }
+        });
+    }
   }
+
   ngOnInit() {
     const signUpButton = document.getElementById('signUp');
     const signInButton = document.getElementById('signIn');
+    const createSignUp = document.getElementById('createSignUp');
     const container = document.getElementById('container');
 
     signUpButton.addEventListener('click', () => {
@@ -103,6 +165,10 @@ export class LoginComponent implements OnInit {
     });
 
     signInButton.addEventListener('click', () => {
+      container.classList.remove("right-panel-active");
+    });
+
+    createSignUp.addEventListener('click', () => {
       container.classList.remove("right-panel-active");
     });
   }

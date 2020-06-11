@@ -32,8 +32,8 @@ img{
 /* start reusable */
 .container{
     width: 90%;
-    max-width: 120rem;
     height: 100%;
+    max-width: 120rem;
     margin: 0 auto 5rem auto;
     position: relative;
 }
@@ -125,6 +125,7 @@ li{
 .nav-link:hover,
 .nav-link:focus{
     color: salmon;
+    transition: color 900ms;
 }
 
 .top-nav.open{
@@ -446,6 +447,7 @@ input[type="submit"]{
 }
 input[type="submit"]:hover{
     background-color: #fd57bf;
+    transition: color 650ms;
 }
 /* start contact */
 
@@ -513,6 +515,7 @@ input[type="submit"]:hover{
     .nav-link:hover,
     .nav-link:focus{
     color: rgb(130, 123, 123);
+    transition: color 650ms;
     }
 
     li{

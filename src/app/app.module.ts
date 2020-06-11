@@ -10,6 +10,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FillDetailsComponent } from './fill-details/fill-details.component';
+import { UserDetailsService } from './service/user-details.service';
 
 @NgModule({
   declarations: [
@@ -40,10 +41,16 @@ import { FillDetailsComponent } from './fill-details/fill-details.component';
       {
         path: '**',
         component: NotFoundComponent
+      },
+      {
+        path: "pagenotfound",
+        component: NotFoundComponent
       }
     ])
   ],
-  providers: [],
+  providers: [
+    UserDetailsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

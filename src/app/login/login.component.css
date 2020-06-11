@@ -6,13 +6,11 @@
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
 	height: 100vh;
-	margin: -20px 0 50px;
+	margin: 5px 0 50px;
 	font-size: 1.3rem;
+	overflow-y: scroll;
 }
 
-.login-container label {
-	width: 100%;
-}
 .login-container h1 {
 	font-weight: bold;
 	margin: 0;
@@ -71,11 +69,13 @@ form {
 	flex-direction: column;
 	padding: 0 .5em;
 	height: 100%;
-	text-align: center;
 }
 
 input {
 	background-color: #eee;
+	
+}
+input, label {
 	border: none;
 	padding: 12px 15px;
 	margin: 8px 2px;
@@ -176,8 +176,6 @@ input {
 	transition: transform 0.6s ease-in-out;
 }
 
-
-
 .container.right-panel-active .overlay {
   	transform: translateX(50%);
 }
@@ -227,6 +225,23 @@ input {
 	margin: 0 5px;
 	height: 40px;
 	width: 40px;
+}
+.disabld {
+	background: #815f7a !important;
+}
+.required-prop {
+    border: #dc3545 solid 1px !important;
+}
+.alert-message {
+	color: #dc3545;
+	align-items: baseline !important;
+}
+.password-message {
+	width: 90%;
+}
+
+.contact-insta a {
+	color: #28a745;
 }
 
 footer {
