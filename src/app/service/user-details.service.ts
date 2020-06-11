@@ -8,8 +8,8 @@ import { AuthDetailModel } from 'src/models/AuthDetailsModel';
   providedIn: 'root'
 })
 export class UserDetailsService {
-  // private url = 'https://dynamic-portfolio-spring-boot.herokuapp.com/dynamicportfolio';
-  private url = 'http://localhost:8080/dynamicportfolio';
+  private url = 'https://dynamic-portfolio-spring-boot.herokuapp.com/dynamicportfolio';
+  // private url = 'http://localhost:8080/dynamicportfolio';
   constructor(private http: HttpClient) { }
 
   validateField(validate: string, value: string) {
