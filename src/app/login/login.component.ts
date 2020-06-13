@@ -122,6 +122,7 @@ export class LoginComponent implements OnInit {
       .subscribe(response => {
         if (response.status.code === 1000) {
           this.accountCreated = true;
+          this.form.reset({username:''});
           this.router.navigate(['/']);
         } else {
           this.accountCreated = false;
