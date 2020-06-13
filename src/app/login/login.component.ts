@@ -129,7 +129,7 @@ export class LoginComponent implements OnInit {
   }
 
   validateEmail() {
-    if (this.form.value.email) {
+    if (this.form.value.email.trim()) {
       this.userDetailsService.validateField('email', this.form.value.email)
         .subscribe(response => {
           if (response.status.code == 105) {
@@ -142,7 +142,7 @@ export class LoginComponent implements OnInit {
   }
 
   validateUser() {
-    if (this.form.value.username) {
+    if (this.form.value.username.trim()) {
       this.userDetailsService.validateField('user', this.form.value.username)
         .subscribe(response => {
           if (response.status.code == 105) {
