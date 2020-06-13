@@ -5,10 +5,10 @@
 	align-items: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
-	height: 100vh;
-	margin: 5px 0 50px;
+	margin: 0;
 	font-size: 1.3rem;
 	overflow-y: scroll;
+	height: 108vh;
 }
 
 .login-container h1 {
