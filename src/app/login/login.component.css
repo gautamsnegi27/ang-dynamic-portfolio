@@ -84,6 +84,7 @@ input, label {
 }
 
 .container {
+	margin: 2% 0 9.5% 0;
 	background-color: #fff;
 	border-radius: 10px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
@@ -270,6 +271,9 @@ footer a {
 }
 
 @media screen and (max-width: 600px){
+	.container {
+		margin-top: 0;
+	}
 	.login-container input{
 	padding: 6px 10px;
 	}

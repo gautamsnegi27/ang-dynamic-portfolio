@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FillDetailsComponent } from './fill-details/fill-details.component';
 import { UserDetailsService } from './service/user-details.service';
+import { InsufficientDetailsComponent } from './insufficient-details/insufficient-details.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UserDetailsService } from './service/user-details.service';
     LoginComponent,
     PortfolioComponent,
     NotFoundComponent,
-    FillDetailsComponent
+    FillDetailsComponent,
+    InsufficientDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -39,11 +41,11 @@ import { UserDetailsService } from './service/user-details.service';
         component: FillDetailsComponent
       },
       {
-        path: '**',
-        component: NotFoundComponent
+        path: "detailsnotfound",
+        component: InsufficientDetailsComponent
       },
       {
-        path: "pagenotfound",
+        path: '**',
         component: NotFoundComponent
       }
     ])

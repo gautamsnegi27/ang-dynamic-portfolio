@@ -51,5 +51,8 @@ export class UserDetailsValidators {
         return null;
     };
 
+    static removeToken(){
+        localStorage.removeItem('token');
+    }
 }
 

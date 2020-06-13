@@ -13,7 +13,7 @@ export class UserDetailsService {
   constructor(private http: HttpClient) { }
 
   validateField(validate: string, value: string) {
-    return this.http.get<ResponseObject>(this.url + '/'+ validate +'/' + value);
+    return this.http.get<ResponseObject>(this.url + '/' + validate + '/' + value);
   }
 
   createUser(signUpBody) {

@@ -13,7 +13,6 @@
 .pnd p{
     font-size: 2.5rem;
     user-select: none;
-    padding: 0.5rem;
     text-align: center;
 }
 
@@ -34,6 +33,10 @@
     transition: 1s;
 }
 
+.isd{
+    padding-top: 15%;
+}
+
 @media screen and (max-width: 600px){
     .pnd{
         background: url("src/assets/images/404_mob.jpg") no-repeat center fixed;
@@ -44,7 +47,7 @@
         font-size: 10rem;
         font-family: 'League Spartan Bold', sans-serif;
         user-select: none;
-        padding-bottom: 25%;
+        padding-bottom: 5%;
         text-align: center;
     }
 
@@ -52,11 +55,13 @@
         width: 100%;
         margin: auto;
     }
-    .error-text {
-        margin-top: 11rem;
-    }
+
     .pnd p{
         font-size: 1.35rem;
         text-align: center;
+    }
+
+    .isd{
+        padding-top: 25%;
     }
 }

@@ -36,7 +36,7 @@ export class PortfolioComponent implements OnInit {
             this.dates.push(date);
           });
         } else {
-          this.router.navigate(['pagenotfound'])
+          this.router.navigate(['/detailsnotfound'])
         }
       });
 
