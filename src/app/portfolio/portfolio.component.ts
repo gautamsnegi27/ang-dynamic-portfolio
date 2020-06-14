@@ -26,15 +26,17 @@ export class PortfolioComponent implements OnInit {
     let user = this.activatedRoute.snapshot.paramMap.get('user')
     this.userDetailsService.getUser(user)
       .subscribe(response => {
-        if (response.status.code != 104
-            && response.responseObject != undefined
+        if(response.status.code == 104){
+          this.router.navigate(['/pageNotFound'])
+        }
+        else if (response.responseObject != undefined
             && response.responseObject.socialMediaDetailsModel != undefined) {
           this.userDetailsModel = response.responseObject
           this.userDetailsModel.experienceDetailModels.forEach(element => {
             this.dates = [];
             let date = element.from + "-" + element.to;
             this.dates.push(date);
-          });
+          }); 
         } else {
           this.router.navigate(['/detailsnotfound'])
         }
